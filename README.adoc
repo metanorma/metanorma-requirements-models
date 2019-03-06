@@ -1,0 +1,64 @@
+= The Metanorma Requirements Models
+
+The http://metanorma.com[Metanorma] markup scheme for Standards incorporates requirements in its information model.
+This repository presents the model used to capture requirements, for use both in standards document markup,
+and as standalone machine-readable artefacts.
+
+== Requirements UML Models
+
+image::images/Requirements.png[]
+
+== Example
+
+[source,xml]
+----
+<bibdata type="standard">
+  <title language="en" format="plain">Collaboration Agreement between CalConnect and ISO/TC 211</title>
+  <uri type='xml'>standards/csd-datetime-explict/csd-datetime-explict.xml</uri>
+  <uri type='html'>standards/csd-datetime-explict/csd-datetime-explict.html</uri>
+  <uri type='relaton'>standards/csd-datetime-explict/cc-18001.xml</uri>
+  <docidentifier>CD 18XX</docidentifier>
+  <date type='published'><on>2018-10-17</on></date>
+
+  <contributor>
+    <role type="author"/>
+    <organization>
+      <name>CalConnect</name>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>CalConnect</name>
+    </organization>
+  </contributor>
+
+  <language>en</language>
+  <script>Latn</script>
+  <status format="plain">draft</status>
+  <copyright>
+    <from>2018</from>
+    <owner>
+      <organization>
+        <name>CalConnect</name>
+      </organization>
+    </owner>
+  </copyright>
+  <editorialgroup>
+    <technical-committee>PUBLISH</technical-committee>
+  </editorialgroup>
+
+  <relation type='partOf'>
+    <bibdata type='governance'>
+      <title>Standard document requirements</title>
+      <uri type='xml'>standards/csd-document-requirements/csd-document-requirements.xml</uri>
+      <docidentifier>CC/DIR 10002</docidentifier>
+      <date type='updated'><on>2018-10-17</on></date>
+      <status>proposal</status>
+      <technical-committee>TC PUBLISH</technical-committee>
+    </bibdata>
+  </relation>
+
+</bibdata>
+----
+

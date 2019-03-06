@@ -1,0 +1,50 @@
+@startuml Requirements
+
+/'
+Diagram:     Requirements
+DateCreate:  2019-03-06
+Description: This diagram presents the model used to capture requirements, for use both in standards document markup,
+and as standalone machine-readable artefacts.
+
+History of changes:
+> YYYY-MM-DD
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+'******* CLASS DEFINITION *********************************************
+
+class Requirement {
+  + obligation: "requirement"
+}
+
+class Recommendation {
+  + obligation: "recommendation"
+}
+
+class Permission {
+  + obligation: "permission"
+}
+
+
+class RequirementType {
+  + obligation: ObligationType[1..*]
+
+}
+
+enum ObligationType <<enumeration>> {
+  requirement
+  recommendation
+  permission
+}
+
+'******* NOTES ********************************************************
+note right of RequirementType: RequirementType is a generic category,\nwhich is agnostic as to obligation.\nRequirement, Recommendation, Permission\nset a specific obligation, although this\ncan be overridden
+
+'******* CLASS RELATIONS **********************************************
+RequirementType <|-- Requirement
+RequirementType <|-- Recommendation
+RequirementType <|-- Permission
+
+@enduml
