@@ -15,6 +15,7 @@ History of changes:
 
 '******* CLASS DEFINITION *********************************************
 
+together {
 class Requirement {
   + obligation: "requirement"
 }
@@ -26,11 +27,30 @@ class Recommendation {
 class Permission {
   + obligation: "permission"
 }
-
+}
 
 class RequirementType {
-  + obligation: ObligationType[1..*]
+  + obligation: ObligationType[1..*],
+  + id: String,
+  + title: FormattedString[0..1],
+  + label: String[0..1],
+  + subject: String[0..1],
+  + inherit: String[0..1],
+  + classification: ClassificationType[0..*],
+  + measurement-target: RequirementSubpart[0..*],
+  + verification: RequirementSubpart[0..*],
+  + import: RequirementSubpart[0..*],
+  + description: RequirementSubpart[0..*],
+  + references: BibliographicItem[0..1]
+}
 
+class RequirementSubpart {
+  + content: Block[1..*]
+}
+
+class ClassificationType {
+  + tag: String,
+  + value: String
 }
 
 enum ObligationType <<enumeration>> {
@@ -39,12 +59,25 @@ enum ObligationType <<enumeration>> {
   permission
 }
 
+class BibliographicItem <<Bibliography>> {
+}
+
+class Block <<BasicDoc>> {
+}
+
 '******* NOTES ********************************************************
-note right of RequirementType: RequirementType is a generic category,\nwhich is agnostic as to obligation.\nRequirement, Recommendation, Permission\nset a specific obligation, although this\ncan be overridden
+note left of RequirementType: RequirementType is a generic category,\nwhich is agnostic as to obligation.\nRequirement, Recommendation, Permission\nset a specific obligation, although this\ncan be overridden
+note right of RequirementType: description, import, verification,\nmeasurement-target, references\ncan appear in any order.
 
 '******* CLASS RELATIONS **********************************************
-RequirementType <|-- Requirement
-RequirementType <|-- Recommendation
-RequirementType <|-- Permission
+Requirement --down-|> RequirementType
+Recommendation --down-|> RequirementType
+Permission --down-|> RequirementType
+
+RequirementType <-- ObligationType
+RequirementType <-- ClassificationType
+RequirementType <-- BibliographicItem
+RequirementType <-- Block
+RequirementType <-- RequirementSubpart
 
 @enduml
