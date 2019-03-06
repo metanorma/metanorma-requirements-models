@@ -8,57 +8,91 @@ and as standalone machine-readable artefacts.
 
 image::images/Requirements.png[]
 
+== Information Model
+
+=== Top level containers
+requirement:: A statement of something that MUST apply (in the RFC 2119). (_Note that "requirement"
+is also used generically in this description, to refer to any formal statement of obligation_.)
+recommmendation:: A statement of something that SHOULD apply (in the RFC 2119).
+permission:: A statement of something that MAY apply (in the RFC 2119).
+
+Requirements can contain other requirments.
+
+=== Attributes and Elements
+obligation:: An attribute that may be used to override the obligation represented in the tag name of the 
+top level containers. Legal values are `requirement`, `recommendation`, `permission`, and can be
+comma-delimited.
+title:: Human-readable title of the requirement.
+label:: Formal identifier with which the requirement is referenced.
+subject:: The party subject to the obligation stated in the requirement.
+inherit:: Reference to the label of another requirement, of which this requirement is a subclass, and from which it inherits attributes.
+classification:: Key/Value pairs of metadata used to describe the requirement. A key can be associated with multiple values.
+
+=== Sub-Containers
+description:: Descriptive statement of the content of the requirement. Is expected to be human-readable,
+and to contain formatting markup following Metanorma conventions. Is expected to be discursive, and be
+resumed after interruption by other sub-containers.
+verification:: Processes or code used to verify that the requirement is being complied with. Can be a test (including test code), or a compliance statement.
+import:: A reference to source code or a statement of prerequisites which is defined elsewhere.
+measurement-target:: Quantitative statement of metrics that the requirement realises.
+references:: A list of references for the requirement, following the https://github.com/riboseinc/relaton-models[Relaton bibliographic model] of Metanorma
+
+Any subcontainer can be either machine-readable or human-readable, or a mixture of the two.
+The expectation is that any machine-readable component will be marked up as sourcecode,
+following Metanorma conventions (including nominating the programming language.)
+
+== Sub-Container Attributes
+type:: A token used to classify sub-containers. For example, a `verification[@type = "unit-test"]` contains a unit test of a single feature, and is to be treated differently from `verification[@type = "comprehensive"]`, which represents a comprehensive test suite.
+exclude:: Indicates that the current sub-container is only intended to be machine-readable, and is not to be rendered in the document output of Metanorma.
+
 == Example
+
+Several examples of Machine Readable Requirements encoded in Metanorma are available at
+https://github.com/riboseinc/metanorma-mrr-samples[metanorma-mrr-samples].
 
 [source,xml]
 ----
-<bibdata type="standard">
-  <title language="en" format="plain">Collaboration Agreement between CalConnect and ISO/TC 211</title>
-  <uri type='xml'>standards/csd-datetime-explict/csd-datetime-explict.xml</uri>
-  <uri type='html'>standards/csd-datetime-explict/csd-datetime-explict.html</uri>
-  <uri type='relaton'>standards/csd-datetime-explict/cc-18001.xml</uri>
-  <docidentifier>CD 18XX</docidentifier>
-  <date type='published'><on>2018-10-17</on></date>
-
-  <contributor>
-    <role type="author"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-  <contributor>
-    <role type="publisher"/>
-    <organization>
-      <name>CalConnect</name>
-    </organization>
-  </contributor>
-
-  <language>en</language>
-  <script>Latn</script>
-  <status format="plain">draft</status>
-  <copyright>
-    <from>2018</from>
-    <owner>
-      <organization>
-        <name>CalConnect</name>
-      </organization>
-    </owner>
-  </copyright>
-  <editorialgroup>
-    <technical-committee>PUBLISH</technical-committee>
-  </editorialgroup>
-
-  <relation type='partOf'>
-    <bibdata type='governance'>
-      <title>Standard document requirements</title>
-      <uri type='xml'>standards/csd-document-requirements/csd-document-requirements.xml</uri>
-      <docidentifier>CC/DIR 10002</docidentifier>
-      <date type='updated'><on>2018-10-17</on></date>
-      <status>proposal</status>
-      <technical-committee>TC PUBLISH</technical-committee>
-    </bibdata>
-  </relation>
-
-</bibdata>
+<recommendation id="_">
+  <label>/ogc/recommendation/wfs/2</label>
+  <inherit>/ss/584/2015/level/1</inherit>
+  <subject>user</subject>
+  <description>
+    <p id="_">I recommend <em>this</em>.</p>
+  </description>
+  <specification exclude="false" type="tabular">
+    <p id="_">This is the object of the recommendation:</p>
+    <table id="_">
+      <tbody>
+        <tr>
+          <td align="left">Object</td>
+          <td align="left">Value</td>
+        </tr>
+        <tr>
+          <td align="left">Mission</td>
+          <td align="left">Accomplished</td>
+        </tr>
+      </tbody>
+    </table>
+  </specification>
+  <description>
+    <p id="_">As for the measurement targets,</p>
+  </description>
+  <measurement-target exclude="false">
+    <p id="_">The measurement target shall be measured as:</p>
+    <formula id="_">
+      <stem type="AsciiMath">r/1 = 0</stem>
+    </formula>
+  </measurement-target>
+  <verification exclude="false">
+    <p id="_">The following code will be run for verification:</p>
+    <sourcecode id="_">CoreRoot(success): HttpResponse
+      if (success)
+      recommendation(label: success-response)
+      end
+    </sourcecode>
+  </verification>
+  <import exclude="true">
+    <sourcecode id="_">success-response()</sourcecode>
+  </import>
+</recommendation>
 ----
-

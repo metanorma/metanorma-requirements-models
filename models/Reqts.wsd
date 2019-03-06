@@ -41,7 +41,8 @@ class RequirementType {
   + verification: RequirementSubpart[0..*],
   + import: RequirementSubpart[0..*],
   + description: RequirementSubpart[0..*],
-  + references: BibliographicItem[0..1]
+  + references: BibliographicItem[0..1],
+  + subrequirement: RequirementType[0..*]
 }
 
 class RequirementSubpart {

@@ -10,7 +10,8 @@ RequirementType {
   attribute id { xsd:ID },
   reqtitle?, label?, subject?, reqinherit?, classification*,
   ( measurementtarget | verification | import | description)*,
-  references?
+  references?,
+  ( requirement | recommendation | permission )*
 }
 
 reqtitle = element title { FormattedString }
