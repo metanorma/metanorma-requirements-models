@@ -45,6 +45,8 @@ class RequirementType {
 }
 
 class RequirementSubpart {
+  + type: String[0..1],
+  + exclude: Boolean[0..1],
   + content: Block[1..*]
 }
 
