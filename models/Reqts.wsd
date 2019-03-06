@@ -38,6 +38,7 @@ class RequirementType {
   + inherit: String[0..1],
   + classification: ClassificationType[0..*],
   + measurement-target: RequirementSubpart[0..*],
+  + specification: RequirementSubpart[0..*],
   + verification: RequirementSubpart[0..*],
   + import: RequirementSubpart[0..*],
   + description: RequirementSubpart[0..*],

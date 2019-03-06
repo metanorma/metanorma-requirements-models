@@ -9,7 +9,7 @@ RequirementType {
   attribute obligation { ObligationType }?,
   attribute id { xsd:ID },
   reqtitle?, label?, subject?, reqinherit?, classification*,
-  ( measurementtarget | verification | import | description)*,
+  ( measurementtarget | specification | verification | import | description)*,
   references?,
   ( requirement | recommendation | permission )*
 }
@@ -20,6 +20,7 @@ subject = element subject { text }
 reqinherit = element subject { text }
 
 measurementtarget = element measurement-target { RequirementSubpart }
+specification = element specification { RequirementSubpart }
 verification = element verification { RequirementSubpart }
 import = element import { RequirementSubpart }
 description = element description { RequirementSubpart }

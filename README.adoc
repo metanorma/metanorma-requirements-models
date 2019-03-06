@@ -32,6 +32,7 @@ classification:: Key/Value pairs of metadata used to describe the requirement. A
 description:: Descriptive statement of the content of the requirement. Is expected to be human-readable,
 and to contain formatting markup following Metanorma conventions. Is expected to be discursive, and be
 resumed after interruption by other sub-containers.
+specification:: Formal specification of the requirement. Is expected to be machine-readable.
 verification:: Processes or code used to verify that the requirement is being complied with. Can be a test (including test code), or a compliance statement.
 import:: A reference to source code or a statement of prerequisites which is defined elsewhere.
 measurement-target:: Quantitative statement of metrics that the requirement realises.
