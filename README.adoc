@@ -49,7 +49,7 @@ exclude:: Indicates that the current sub-container is only intended to be machin
 == Example
 
 Several examples of Machine Readable Requirements encoded in Metanorma are available at
-https://github.com/riboseinc/metanorma-mrr-samples[metanorma-mrr-samples].
+https://github.com/metanorma/metanorma-mrr-samples[metanorma-mrr-samples].
 
 [source,xml]
 ----
