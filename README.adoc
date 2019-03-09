@@ -36,7 +36,7 @@ specification:: Formal specification of the requirement. Is expected to be machi
 verification:: Processes or code used to verify that the requirement is being complied with. Can be a test (including test code), or a compliance statement.
 import:: A reference to source code or a statement of prerequisites which is defined elsewhere.
 measurement-target:: Quantitative statement of metrics that the requirement realises.
-references:: A list of references for the requirement, following the https://github.com/riboseinc/relaton-models[Relaton bibliographic model] of Metanorma
+references:: A list of references for the requirement, following the https://github.com/metanorma/relaton-models[Relaton bibliographic model] of Metanorma
 
 Any subcontainer can be either machine-readable or human-readable, or a mixture of the two.
 The expectation is that any machine-readable component will be marked up as sourcecode,
