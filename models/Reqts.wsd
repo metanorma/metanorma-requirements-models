@@ -7,7 +7,7 @@ Description: This diagram presents the model used to capture requirements, for u
 and as standalone machine-readable artefacts.
 
 History of changes:
-> YYYY-MM-DD
+> 2019-03-19: Added RequirementType/filename
 '/
 
 '******* CONFIGURATION ************************************************
@@ -32,6 +32,7 @@ class Permission {
 class RequirementType {
   + obligation: ObligationType[1..*],
   + id: String,
+  + filename: String[0..1],
   + title: FormattedString[0..1],
   + label: String[0..1],
   + subject: String[0..1],

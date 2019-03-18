@@ -8,6 +8,7 @@ permission = element permission { RequirementType }
 RequirementType {
   attribute obligation { ObligationType }?,
   attribute id { xsd:ID },
+  attribute filename { text }?,
   reqtitle?, label?, subject?, reqinherit?, classification*,
   ( measurementtarget | specification | verification | import | description)*,
   references?,
