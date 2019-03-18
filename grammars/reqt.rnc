@@ -1,5 +1,5 @@
-include "isodoc.rnc" { 
-}
+#Presupposes isodoc.rnc, is included in it
+#include "isodoc.rnc" { }
 
 requirement = element requirement { RequirementType }
 recommendation = element recommendation { RequirementType }
