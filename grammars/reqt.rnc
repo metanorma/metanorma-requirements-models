@@ -30,7 +30,7 @@ references = element references { bibitem+ }
 
 RequirementSubpart = 
   attribute type { text }?,
-  attribute exclude { xsd:bool }?,
+  attribute exclude { xsd:boolean }?,
   BasicBlock+
 
 
