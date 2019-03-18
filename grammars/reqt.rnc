@@ -11,7 +11,7 @@ RequirementType =
   attribute filename { text }?,
   reqtitle?, label?, subject?, reqinherit?, classification*,
   ( measurementtarget | specification | verification | import | description)*,
-  references?,
+  reqt_references?,
   ( requirement | recommendation | permission )*
 
 
@@ -26,7 +26,7 @@ verification = element verification { RequirementSubpart }
 import = element import { RequirementSubpart }
 description = element description { RequirementSubpart }
 
-references = element references { bibitem+ }
+reqt_references = element references { bibitem+ }
 
 RequirementSubpart = 
   attribute type { text }?,
