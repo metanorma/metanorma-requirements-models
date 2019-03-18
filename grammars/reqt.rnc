@@ -5,7 +5,7 @@ requirement = element requirement { RequirementType }
 recommendation = element recommendation { RequirementType }
 permission = element permission { RequirementType }
 
-RequirementType = {
+RequirementType = 
   attribute obligation { ObligationType }?,
   attribute id { xsd:ID },
   attribute filename { text }?,
@@ -13,7 +13,7 @@ RequirementType = {
   ( measurementtarget | specification | verification | import | description)*,
   references?,
   ( requirement | recommendation | permission )*
-}
+
 
 reqtitle = element title { FormattedString }
 label = element label { text }
@@ -28,11 +28,11 @@ description = element description { RequirementSubpart }
 
 references = element references { bibitem+ }
 
-RequirementSubpart = {
+RequirementSubpart = 
   attribute type { text }?,
   attribute exclude { xsd:bool }?,
   BasicBlock+
-}
+
 
 ObligationType = ( "requirement" | "recommendation" | "permission" )
 
