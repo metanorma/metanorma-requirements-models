@@ -32,6 +32,7 @@ class Permission {
 class RequirementType {
   + obligation: ObligationType[1..*],
   + id: String,
+  + unnumbered: Boolean[0..1],
   + filename: String[0..1],
   + title: FormattedString[0..1],
   + label: String[0..1],
