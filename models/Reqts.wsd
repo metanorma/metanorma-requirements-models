@@ -40,6 +40,8 @@ class RequirementType {
   + label: String[0..1],
   + subject: String[0..1],
   + inherit: String[0..1],
+  + model: String[0..1],
+  + type: String[0..1],
   + classification: ClassificationType[0..*],
   + measurement-target: RequirementSubpart[0..*],
   + specification: RequirementSubpart[0..*],

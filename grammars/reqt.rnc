@@ -11,6 +11,8 @@ RequirementType =
   attribute subsequence { text }?,
   attribute id { xsd:ID },
   attribute filename { text }?,
+  attribute model { text }?,
+  attribute type { text }?,
   reqtitle?, label?, subject?, reqinherit?, classification*,
   ( measurementtarget | specification | verification | import | description)*,
   reqt_references?,
