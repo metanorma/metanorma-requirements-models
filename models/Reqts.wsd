@@ -9,6 +9,7 @@ and as standalone machine-readable artefacts.
 History of changes:
 > 2019-03-19: Added RequirementType/filename
 > 2019-0-19: Added subsequence
+> 2020-06-16: Added number
 '/
 
 '******* CONFIGURATION ************************************************
@@ -34,6 +35,7 @@ class RequirementType {
   + obligation: ObligationType[1..*],
   + id: String,
   + unnumbered: Boolean[0..1],
+  + number: String[0..1],
   + subsequence: String[0..1],
   + filename: String[0..1],
   + title: FormattedString[0..1],
