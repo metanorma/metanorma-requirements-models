@@ -10,6 +10,8 @@ RequirementType =
   attribute unnumbered { xsd:boolean }?,
   attribute number { text }?,
   attribute subsequence { text }?,
+  attribute keep-with-next { xsd:boolean }?,
+  attribute keep-lines-together { xsd:boolean }?,
   attribute id { xsd:ID },
   attribute filename { text }?,
   attribute model { text }?,
@@ -36,6 +38,8 @@ reqt_references = element references { bibitem+ }
 RequirementSubpart = 
   attribute type { text }?,
   attribute exclude { xsd:boolean }?,
+  attribute keep-with-next { xsd:boolean }?,
+  attribute keep-lines-together { xsd:boolean }?,
   BasicBlock+
 
 

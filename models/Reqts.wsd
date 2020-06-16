@@ -10,6 +10,7 @@ History of changes:
 > 2019-03-19: Added RequirementType/filename
 > 2019-0-19: Added subsequence
 > 2020-06-16: Added number
+> 2020-06-16: Added keep-with-next
 '/
 
 '******* CONFIGURATION ************************************************
@@ -37,6 +38,8 @@ class RequirementType {
   + unnumbered: Boolean[0..1],
   + number: String[0..1],
   + subsequence: String[0..1],
+  + keep-with-next: Boolean[0..1],
+  + keep-lines-together: Boolean[0..1],
   + filename: String[0..1],
   + title: FormattedString[0..1],
   + label: String[0..1],
@@ -58,6 +61,8 @@ class RequirementSubpart {
   + type: String[0..1],
   + exclude: Boolean[0..1],
   + content: Block[1..*]
+  + keep-with-next: Boolean[0..1],
+  + keep-lines-together: Boolean[0..1],
 }
 
 class ClassificationType {
