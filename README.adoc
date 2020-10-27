@@ -1,8 +1,6 @@
 = The Metanorma Requirements Models
 
-image:https://github.com/metanorma/metanorma-requirements-models/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-requirements-models/actions?query=workflow%3Aubuntu"]
-image:https://github.com/metanorma/metanorma-requirements-models/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-requirements-models/actions?query=workflow%3Amacos"]
-image:https://github.com/metanorma/metanorma-requirements-models/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-requirements-models/actions?query=workflow%3Awindows"]
+image:https://github.com/metanorma/metanorma-requirements-models/workflows/make/badge.svg["Build Status", link="https://github.com/metanorma/metanorma-requirements-models/actions?query=workflow%3Amake"]
 
 The http://metanorma.com[Metanorma] markup scheme for Standards incorporates requirements in its information model.
 This repository presents the model used to capture requirements, for use both in standards document markup,
