@@ -13,8 +13,6 @@ History of changes:
 > 2020-06-16: Added keep-with-next
 '/
 
-'******* CONFIGURATION ************************************************
-!include style.uml.inc
 
 '******* CLASS DEFINITION *********************************************
 

@@ -1,0 +1,258 @@
+diagram OGCModSpec {
+  title "OGC ModSpec OGC 08-131r3"
+
+  class Specification {
+    definition {
+      A specification, to become a standard must be approved by an authority, such as ISO or OGC. This gives the specification a namespace corresponding to the standards authority. Thus the name of the specification is usually a local name in this namespace: for example "ISO 19107: Geographic Information – Spatial schema" is an approved specification of ISO TC 211 (the authority as a TC under ISO). The parts of the name that give this are "ISO" and "Geographic Information". The local name within this namespace is "19107: Spatial schema". This syntax is not usual for namespaces where the namespace name is usually either a prefix or suffix of the local name. GenericName, LocalName, Namespace are all types described in "ISO 19103: Geographic information – Conceptual schema language". The attributes of a Specification describe its local name, its authority, the date of publication and its current status (such as CD, DIS, IS in ISO, or Draft, Candidate Standard or Standard in OGC).
+    }
+    name: String {
+      definition {
+        name for the standards
+      }
+    }
+    authority: Principal {
+      definition {
+        Standards Body & Namespace for name
+      }
+    }
+    date: DateTime {
+      definition {
+        publication date
+      }
+    }
+    status: String {
+      definition {
+        description of current status
+      }
+    }
+  }
+
+  class ConformanceSuite {
+    definition {
+      The unique conformance suite of a specification lists the tests (grouped into conformance test classes consisting of some number of conformance test modules, containing some number of conformance tests) that allow testing of an implementation of the specification for conformance with the specification. Every specification needs one of these suites, or conformance cannot be claimed with proof. In ISO and OGC, the conformance suite included in the specification is usually an abstract description of the tests which will be implemented. Other standards may use a more concrete description. For the purposes of this OGC standard, the precise nature of the conformance suite is not particularly important as long as it is not ambiguously stated.
+      Each conformance test within a conformance class should be against a single standardization target defined for that class. A conformance suite may contain several defined conformances classes for the same standardization target.
+    }
+    class: ConformanceClass[1..*]
+  }
+
+  class ConformanceClass {
+    definition {
+      The requirements in the requirements classes of a specification have to be tested and the conformance classes are the containers for these tests’ definition. The requirements classes will have interdependencies, and this is reflected in the explicit dependencies between the conformance classes. If class "a" is dependent on class "b", then to pass the test for "a" a standardization target must also pass the test for "b." The class name is shared with its corresponding requirements class.
+    }
+    name: String {
+      definition {
+        name of the conformance class
+      }
+    }
+    dependency: ConformanceClass[0..*] {
+      definition {
+        other classes that must be passed if this one is to be passed (consistent with Requirements class)
+      }
+    }
+    requirement: RequirementClass
+  }
+
+  class RequirementsClass {
+    definition {
+      The specification requirements classes (usually realized as clauses in the specification document) segment the requirements in the specification in a manner consistent with the conformance classes. Since the requirements class and the conformance class will eventually be referred to in a certification of conformance, they should have names, probably in the namespace defined by the specification’s name and authority.
+    }
+    name: String {
+      definition {
+        name of the conformance class
+      }
+    }
+    dependency: RequirementsClass [0..*] {
+      definition {
+        dependent requirements classes
+      }
+    }
+    module: RequirementsModule[1..*] {
+      definition {
+        subsets of this requirementClass
+      }
+    }
+    targetType: StandardizationTargetType
+  }
+
+  class RequirementsModule {
+    definition {
+      The specification requirements modules (usually realized as subclauses of the requirements class in the specification document) segment the requirements in the specification in a manner consistent with the conformance test modules.
+    }
+    name: String
+    requirement: Requirement[1..*]
+  }
+
+  class NormativeStatement {
+    definition {
+      The normative statements, either requirements or recommendations of a standard, are organized into the requirements modules and classes, and may be tested by the conformance tests in their requirements class’s corresponding conformance class. If tested, the statement is a "Requirement", and if not tested the statement is a "Recommendation."
+    }
+    name: String {
+      definition {
+        name the requirement
+      }
+    }
+    test: ConformanceTest[1..*] {
+      definition {
+        corresponding conformance test
+      }
+    }
+  }
+
+  class Requirement {
+    definition {
+      Each normative statement which is tested by any conformance test is a requirement.
+    }
+    test: ConformanceTest[1..*] {
+      definition {
+        corresponding conformance test
+      }
+    }
+  }
+
+  class Recommendation {
+    definition {
+      A normative suggestion which will not be directly tested is a "Recommendation." Recommendations have a variety of uses, for example:
+
+      Legal restriction, such as "not for commercial use" or "for planning purposes." These allow the specification to restrict use of its implementation to standardization targets for which it was designed.
+      Statement of best practices. These are included as suggestions for logical designs that may implement the requirements in the same module.
+      Regardless of their use, Recommendations are not tested since they are not required of all conformant implementations.
+    }
+  }
+
+  enum TestType {
+    basic
+    capabilities
+  }
+
+  class ConformanceTest {
+    testPurpose: String
+    testMethod: String
+    Reference: String
+    testType: TestType
+    requirement: Requirement[1..*]
+  }
+
+  class StandardizationTarget <<implementation>> {
+    definition {
+      Each conformance class (and hence requirements class) is targeted to a particular type of implementation. An implementation testable by a conformance class is a StandardizationTarget of that class, and (once the appropriate test have been passed) can carry a certificate indicating its conformance to a requirements class proved by the tests in the conformance class.
+    }
+    conformanceCertificates: String[0..*] {
+      definition {
+        conformance classes passed by this target
+      }
+    }
+    type: StandardizationTargetType
+  }
+
+  class StandardizationTargetType <<metaclass>> {}
+
+
+  class Principal {
+    name: String
+    contactIndormation: String[1..*]
+  }
+
+  association {
+    owner_type aggregation
+    member_type direct
+    owner RequirementsClass#dependency [0..*]
+    member RequirementsClass
+  }
+
+  association {
+    owner_type aggregation
+    member_type direct
+    owner Specification#reference [0..*]
+    member Specification
+  }
+
+  association {
+    owner_type composition
+    member_type direct
+    owner ConformanceSuite#testSuite
+    member Specification
+  }
+
+  association {
+    owner_type composition
+    member_type direct
+    owner RequirementsClass#class [1..*]
+    member Specification
+  }
+
+  association {
+    owner_type aggregation
+    member_type direct
+    owner StandardizationTargetType#targetType 1
+    member RequirementsClass# [0..*]
+  }
+
+  association {
+    owner_type composition
+    member_type direct
+    owner ConformanceClass#class [1..*]
+    member ConformanceSuite
+  }
+
+  association {
+    owner_type aggregation
+    member_type direct
+    owner ConformanceClass#dependency [0..*]
+    member ConformanceClass
+  }
+
+  association {
+    owner ConformanceClass#requirements 1
+    member RequirementsClass# 1
+  }
+
+  association {
+    owner_type composition
+    member_type direct
+    owner ConformanceModule#testSuite [1..*]
+    member ConformanceClass
+  }
+
+  association {
+    owner_type direct
+    member_type composition
+    owner RequirementsClass
+    member RequirementsModule#module
+  }
+
+  association {
+    owner StandardizationTarget
+    member StandardizationTargetType
+  }
+
+  association {
+    owner_type direct
+    member_type composition
+    owner ConformanceModule
+    member ConformanceTest#test [1..*]
+  }
+
+  association {
+    owner_type direct
+    member_type composition
+    owner RequirementsModule
+    member NormativeStatement#requirement [1..*]
+  }
+
+  association {
+    owner Requirement
+    member NormativeStatement
+  }
+
+  association {
+    owner Recommendation
+    member NormativeStatement
+  }
+
+  association {
+    owner_type direct
+    member_type direct
+    owner ConformanceTest#test [1..*]
+    member Requirement#requirement [1..*]
+  }
+}
