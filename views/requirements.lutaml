@@ -1,0 +1,122 @@
+diagram requirements {
+  
+  
+  
+  
+  class Requirement {
+    + obligation: "requirement"
+  }
+  
+  class Recommendation {
+    + obligation: "recommendation"
+  }
+  
+  class Permission {
+    + obligation: "permission"
+  }
+  
+  class RequirementType {
+    + obligation: ObligationType[1..*]
+    + id: String
+    + unnumbered: Boolean[0..1]
+    + number: String[0..1]
+    + subsequence: String[0..1]
+    + keep-with-next: Boolean[0..1]
+    + keep-lines-together: Boolean[0..1]
+    + filename: String[0..1]
+    + title: FormattedString[0..1]
+    + label: String[0..1]
+    + subject: String[0..1]
+    + inherit: String[0..*]
+    + model: String[0..1]
+    + type: String[0..1]
+    + classification: ClassificationType[0..*]
+    + measurement-target: RequirementSubpart[0..*]
+    + specification: RequirementSubpart[0..*]
+    + verification: RequirementSubpart[0..*]
+    + component: ClassedRequirementSubpart[0..*]
+    + import: RequirementSubpart[0..*]
+    + description: RequirementSubpart[0..*]
+    + references: BibliographicItem[0..1]
+    + subrequirement: RequirementType[0..*]
+  }
+  
+  class RequirementSubpart {
+    + type: String[0..1]
+    + exclude: Boolean[0..1]
+    + content: Block[1..*]
+    + keep-with-next: Boolean[0..1]
+    + keep-lines-together: Boolean[0..1]
+  }
+  
+  class ClassedRequirementSubpart {
+    + class: String
+  }
+  
+  
+  class ClassificationType {
+    + tag: String
+    + value: String
+  }
+  
+  enum ObligationType <<enumeration>> {
+    requirement
+    recommendation
+    permission
+  }
+  
+  class BibliographicItem <<Bibliography>> {
+  }
+  
+  class Block <<BasicDoc>> {
+  }
+  
+  
+  association {
+    owner Requirement
+    member RequirementType
+    member_type inheritance
+  }
+  association {
+    owner Recommendation
+    member RequirementType
+    member_type inheritance
+  }
+  association {
+    owner Permission
+    member RequirementType
+    member_type inheritance
+  }
+  
+  association {
+    owner RequirementSubpart
+    member ClassedRequirementSubpart
+    owner_type inheritance
+  }
+  association {
+    owner RequirementType
+    member ObligationType
+    owner_type direct
+  }
+  association {
+    owner RequirementType
+    member ClassificationType
+    owner_type direct
+  }
+  association {
+    owner RequirementType
+    member BibliographicItem
+    owner_type direct
+  }
+  association {
+    owner RequirementType
+    member Block
+    owner_type direct
+  }
+  association {
+    owner RequirementType
+    member RequirementSubpart
+    owner_type direct
+  }
+  
+}
