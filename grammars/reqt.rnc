@@ -16,7 +16,7 @@ RequirementType =
   attribute filename { text }?,
   attribute model { text }?,
   attribute type { text }?,
-  reqtitle?, label?, subject?, reqinherit*, classification*,
+  reqtitle?, label?, subject*, reqinherit*, classification*,
   ( measurementtarget | specification | verification | import | description | component)*,
   reqt_references?,
   ( requirement | recommendation | permission )*

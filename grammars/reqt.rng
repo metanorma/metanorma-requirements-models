@@ -64,9 +64,9 @@
     <optional>
       <ref name="label"/>
     </optional>
-    <optional>
+    <zeroOrMore>
       <ref name="subject"/>
-    </optional>
+    </zeroOrMore>
     <zeroOrMore>
       <ref name="reqinherit"/>
     </zeroOrMore>

@@ -11,12 +11,12 @@ History of changes:
 > 2019-0-19: Added subsequence
 > 2020-06-16: Added number
 > 2020-06-16: Added keep-with-next
+> 2020-08-09: Add components
 '/
 
 
 '******* CLASS DEFINITION *********************************************
 
-together {
 class Requirement {
   + obligation: "requirement"
 }
@@ -28,43 +28,48 @@ class Recommendation {
 class Permission {
   + obligation: "permission"
 }
-}
 
 class RequirementType {
-  + obligation: ObligationType[1..*],
-  + id: String,
-  + unnumbered: Boolean[0..1],
-  + number: String[0..1],
-  + subsequence: String[0..1],
-  + keep-with-next: Boolean[0..1],
-  + keep-lines-together: Boolean[0..1],
-  + filename: String[0..1],
-  + title: FormattedString[0..1],
-  + label: String[0..1],
-  + subject: String[0..1],
-  + inherit: String[0..*],
-  + model: String[0..1],
-  + type: String[0..1],
-  + classification: ClassificationType[0..*],
-  + measurement-target: RequirementSubpart[0..*],
-  + specification: RequirementSubpart[0..*],
-  + verification: RequirementSubpart[0..*],
-  + import: RequirementSubpart[0..*],
-  + description: RequirementSubpart[0..*],
-  + references: BibliographicItem[0..1],
+  + obligation: ObligationType[1..*]
+  + id: String
+  + unnumbered: Boolean[0..1]
+  + number: String[0..1]
+  + subsequence: String[0..1]
+  + keep-with-next: Boolean[0..1]
+  + keep-lines-together: Boolean[0..1]
+  + filename: String[0..1]
+  + title: FormattedString[0..1]
+  + label: String[0..1]
+  + subject: String[0..1]
+  + inherit: String[0..*]
+  + model: String[0..1]
+  + type: String[0..1]
+  + classification: ClassificationType[0..*]
+  + measurement-target: RequirementSubpart[0..*]
+  + specification: RequirementSubpart[0..*]
+  + verification: RequirementSubpart[0..*]
+  + component: ClassedRequirementSubpart[0..*]
+  + import: RequirementSubpart[0..*]
+  + description: RequirementSubpart[0..*]
+  + references: BibliographicItem[0..1]
   + subrequirement: RequirementType[0..*]
 }
 
 class RequirementSubpart {
-  + type: String[0..1],
-  + exclude: Boolean[0..1],
+  + type: String[0..1]
+  + exclude: Boolean[0..1]
   + content: Block[1..*]
-  + keep-with-next: Boolean[0..1],
-  + keep-lines-together: Boolean[0..1],
+  + keep-with-next: Boolean[0..1]
+  + keep-lines-together: Boolean[0..1]
 }
 
+class ClassedRequirementSubpart {
+  + class: String
+}
+
+
 class ClassificationType {
-  + tag: String,
+  + tag: String
   + value: String
 }
 
@@ -82,13 +87,14 @@ class Block <<BasicDoc>> {
 
 '******* NOTES ********************************************************
 note left of RequirementType: RequirementType is a generic category,\nwhich is agnostic as to obligation.\nRequirement, Recommendation, Permission\nset a specific obligation, although this\ncan be overridden
-note right of RequirementType: description, import, verification,\nmeasurement-target, references\ncan appear in any order.
+note right of RequirementType: description, import, verification,\nmeasurement-target, component, references\ncan appear in any order.
 
 '******* CLASS RELATIONS **********************************************
 Requirement --down-|> RequirementType
 Recommendation --down-|> RequirementType
 Permission --down-|> RequirementType
 
+RequirementSubpart <|-- ClassedRequirementSubpart
 RequirementType <-- ObligationType
 RequirementType <-- ClassificationType
 RequirementType <-- BibliographicItem
