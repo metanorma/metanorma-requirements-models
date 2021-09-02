@@ -181,10 +181,15 @@ diagram OGCModSpec {
   }
 
   class ConformanceTest {
+    abstract: Boolean {
+      definition {
+        Whether this test is abstract or concrete.
+      }
+    }
     testPurpose: String
     testMethod: String
-    Reference: String
     testType: TestType
+    reference: String
     requirement: Requirement[1..*]
   }
 
