@@ -16,6 +16,8 @@ RequirementType =
   attribute filename { text }?,
   attribute model { text }?,
   attribute type { text }?,
+  attribute tag { text }?,
+  attribute multilingual-rendering { MultilingualRenderingType }?,
   reqtitle?, label?, subject*, reqinherit*, classification*,
   ( measurementtarget | specification | verification | import | description | component)*,
   reqt_references?,
@@ -44,6 +46,8 @@ RequirementSubpart =
   attribute exclude { xsd:boolean }?,
   attribute keep-with-next { xsd:boolean }?,
   attribute keep-lines-together { xsd:boolean }?,
+  attribute tag { text }?,
+  attribute multilingual-rendering { MultilingualRenderingType }?,
   BasicBlock+
 
 
