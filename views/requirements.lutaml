@@ -25,7 +25,7 @@ diagram requirements {
     + keep-lines-together: Boolean[0..1]
     + filename: String[0..1]
     + title: FormattedString[0..1]
-    + label: String[0..1]
+    + label: FormattedString[0..1]
     + subject: String[0..*]
     + inherit: String[0..*]
     + model: String[0..1]

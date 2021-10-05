@@ -109,7 +109,9 @@
   </define>
   <define name="label">
     <element name="label">
-      <text/>
+      <oneOrMore>
+        <ref name="TextElement"/>
+      </oneOrMore>
     </element>
   </define>
   <define name="subject">

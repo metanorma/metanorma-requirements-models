@@ -8,7 +8,7 @@ and as standalone machine-readable artefacts.
 
 == Requirements UML Models
 
-image::images/Requirements.png[]
+image::images/eequirements.png[]
 
 == Information Model
 
