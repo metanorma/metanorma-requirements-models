@@ -44,7 +44,8 @@ diagram requirements {
   class RequirementSubpart {
     + type: String[0..1]
     + exclude: Boolean[0..1]
-    + content: Block[1..*]
+    + content: Block[0..*]
+    + component: ClassedRequirementSubpart[0..*]
     + keep-with-next: Boolean[0..1]
     + keep-lines-together: Boolean[0..1]
   }

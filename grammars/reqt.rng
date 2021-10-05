@@ -194,7 +194,10 @@
       </attribute>
     </optional>
     <oneOrMore>
-      <ref name="BasicBlock"/>
+      <choice>
+        <ref name="BasicBlock"/>
+        <ref name="component"/>
+      </choice>
     </oneOrMore>
   </define>
   <define name="ObligationType">

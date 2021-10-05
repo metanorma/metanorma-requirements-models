@@ -48,7 +48,7 @@ RequirementSubpart =
   attribute keep-lines-together { xsd:boolean }?,
   attribute tag { text }?,
   attribute multilingual-rendering { MultilingualRenderingType }?,
-  BasicBlock+
+  (BasicBlock|component)+
 
 
 ObligationType = ( "requirement" | "recommendation" | "permission" )
