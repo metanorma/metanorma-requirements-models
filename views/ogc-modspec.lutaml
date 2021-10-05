@@ -1,5 +1,5 @@
 diagram OGCModSpec {
-  title "OGC ModSpec OGC 08-131r3"
+  title "OGC 08-131r3 ModSpec"
 
   class Specification {
     definition {
@@ -22,22 +22,22 @@ diagram OGCModSpec {
     }
     name: String {
       definition {
-        name for the standards
+        Name of the specification.
       }
     }
     authority: Principal {
       definition {
-        Standards Body & Namespace for name
+        Standards body or author of this specification.
       }
     }
     date: DateTime {
       definition {
-        publication date
+        Publication date of the specification.
       }
     }
     status: String {
       definition {
-        description of current status
+        Publication status of this specification.
       }
     }
   }
@@ -61,7 +61,11 @@ diagram OGCModSpec {
       may contain several defined conformance classes for the same
       standardization target.
     }
-    class: ConformanceClass[1..*]
+    classes: ConformanceClass[1..*] {
+      definition {
+        Conformance classes that this conformance suite contains.
+      }
+    }
   }
 
   class ConformanceClass {
@@ -76,16 +80,21 @@ diagram OGCModSpec {
     }
     name: String {
       definition {
-        name of the conformance class
+        Name of the conformance class.
       }
     }
-    dependency: ConformanceClass[0..*] {
+    dependencies: ConformanceClass[0..*] {
       definition {
-        other classes that must be passed if this one is to be passed
-        (consistent with Requirements class)
+        Conformance classes that this conformance class depends on.
+        These dependent conformance classes must be passed if this one is to be
+        passed.
       }
     }
-    requirementsClass: RequirementsClass
+    requirementsClass: RequirementsClass {
+      definition {
+        The requirements class that this conformance class aims to test against.
+      }
+    }
   }
 
   class RequirementsClass {
@@ -99,20 +108,26 @@ diagram OGCModSpec {
     }
     name: String {
       definition {
-        name of the conformance class
+        Name of the requirements class.
       }
     }
-    dependency: RequirementsClass [0..*] {
+    dependencies: RequirementsClass[0..*] {
       definition {
-        dependent requirements classes
+        Requirements classes that this requirements class depends on.
+        These dependent requirements classes must be satisfied for this
+        requirements class to be satisfied.
       }
     }
-    module: RequirementsModule[1..*] {
+    modules: RequirementsModule[1..*] {
       definition {
-        subsets of this requirementClass
+        Requirements modules that make up this requirements class.
       }
     }
-    targetType: StandardizationTargetType
+    targetType: StandardizationTargetType {
+      definition {
+        Type of standardization target.
+      }
+    }
   }
 
   class RequirementsModule {
@@ -122,8 +137,18 @@ diagram OGCModSpec {
       requirements in the specification in a manner consistent with the
       conformance test modules.
     }
-    name: String
-    requirement: Requirement[1..*]
+
+    name: String {
+      definition {
+        Name of the requirements module.
+      }
+    }
+
+    requirements: Requirement[1..*] {
+      definition {
+        Requirements that this requirements module contains.
+      }
+    }
   }
 
   class NormativeStatement {
@@ -136,24 +161,31 @@ diagram OGCModSpec {
     }
     name: String {
       definition {
-        name of the requirement
-      }
-    }
-    test: ConformanceTest[1..*] {
-      definition {
-        corresponding conformance test
+        Name of the normative statement.
       }
     }
   }
 
   class Requirement {
     definition {
-      Each normative statement which is tested by any conformance test is a
-      requirement.
+      Normative statement that constitutes a requirement.
     }
-    test: ConformanceTest[1..*] {
+
+    tests: ConformanceTest[1..*] {
       definition {
-        corresponding conformance test
+        Conformance tests that when passed confirm the satisfaction of this
+        requirement.
+
+        NOTE: If this requirement is a requirement part, it may or may not have
+        a corresponding conformance test.
+      }
+    }
+
+    parts: Requirement[0..*] {
+      definition {
+        Collection of requirements that are parts to this requirement.
+        Satisfaction of all requirement parts are necessary for this requirement
+        to be satisfied. Optional.
       }
     }
   }
@@ -176,21 +208,90 @@ diagram OGCModSpec {
   }
 
   enum TestType {
-    basic
-    capabilities
+    definition {
+      Type of test.
+    }
+    basic {
+      definition {
+        Basic test.
+      }
+    }
+    capabilities {
+      definition {
+        Test against capabilities.
+      }
+    }
+  }
+
+  class ConformanceTestMethod {
+    requirements: Requirement[0..*] {
+      definition {
+        Corresponding requirement or requirement part that this conformance
+        test method is supposed to test against. This is optional.
+      }
+    }
+    steps: ConformanceTestStep[1..*] {
+      definition {
+        Test steps to be performed as part of this conformance test method.
+        At least one test step is required.
+      }
+    }
   }
 
   class ConformanceTest {
+    definition {
+      A conformance test aims to satisfy a requirement and can potentially
+      contain multiple test methods.
+    }
     abstract: Boolean {
       definition {
-        Whether this test is abstract or concrete.
+        Whether this test is abstract or concrete. An abstract conformance test
+        is commonly called an abstract test.
       }
     }
-    testPurpose: String
-    testMethod: String
-    testType: TestType
-    reference: String
-    requirement: Requirement[1..*]
+    testPurpose: String {
+      definition {
+        Purpose of the conformance test.
+      }
+    }
+    testType: TestType {
+      definition {
+        Type of the conformance test.
+      }
+    }
+    testMethod: ConformanceTestMethod[0..*] {
+      definition {
+        Method to perform this conformance test.
+        A method is considered a "part" of the test if there are multiple of them.
+      }
+    }
+    references: RichText[0..*] {
+      definition {
+        References to the specification(s) of the conformance test.
+      }
+    }
+    requirements: Requirement[1..*] {
+      definition {
+        Corresponding requirement or requirement part that this conformance
+        test is supposed to test against.
+      }
+    }
+  }
+
+  class ConformanceTestStep {
+    definition {
+      Test step to be performed within a conformance test.
+    }
+    content: RichText[1..*] {
+      definition {
+        Specification for executing the test step.
+      }
+    }
+    inner: ConformanceTestStep[0..*] {
+      definition {
+        Inner test steps after performing the current test step.
+      }
+    }
   }
 
   class StandardizationTarget <<implementation>> {
@@ -207,11 +308,14 @@ diagram OGCModSpec {
         conformance classes passed by this target
       }
     }
-    type: StandardizationTargetType
+    type: StandardizationTargetType {
+      definition {
+        Type of the standardization target type.
+      }
+    }
   }
 
   class StandardizationTargetType <<metaclass>> {}
-
 
   class Principal {
     name: String
@@ -221,89 +325,96 @@ diagram OGCModSpec {
   association {
     owner_type aggregation
     member_type direct
-    owner RequirementsClass#dependency [0..*]
-    member RequirementsClass
-  }
-
-  association {
-    owner_type aggregation
-    member_type direct
-    owner Specification#reference [0..*]
-    member Specification
-  }
-
-  association {
-    owner_type composition
-    member_type direct
-    owner ConformanceSuite#testSuite
-    member Specification
-  }
-
-  association {
-    owner_type composition
-    member_type direct
-    owner RequirementsClass#class [1..*]
-    member Specification
-  }
-
-  association {
-    owner_type aggregation
-    member_type direct
     owner StandardizationTargetType#targetType 1
     member RequirementsClass# [0..*]
   }
 
-  association {
-    owner_type composition
-    member_type direct
-    owner ConformanceClass#class [1..*]
-    member ConformanceSuite
-  }
+  //association {
+  // owner ConformanceClass#requirements 1
+  //  member RequirementsClass# 1
+  //}
 
-  association {
-    owner_type aggregation
-    member_type direct
-    owner ConformanceClass#dependency [0..*]
-    member ConformanceClass
-  }
+  //  association {
+  //    owner_type composition
+  //    member_type direct
+  //    owner ConformanceSuite#testSuite
+  //    member Specification
+  //  }
 
-  association {
-    owner ConformanceClass#requirements 1
-    member RequirementsClass# 1
-  }
+  //  association {
+  //    owner_type composition
+  //    member_type direct
+  //    owner RequirementsClass#class [1..*]
+  //    member Specification
+  //  }
 
-  association {
-    owner_type composition
-    member_type direct
-    owner ConformanceModule#testSuite [1..*]
-    member ConformanceClass
-  }
+  //  association {
+  //    owner_type composition
+  //    member_type direct
+  //    owner ConformanceClass#class [1..*]
+  //    member ConformanceSuite
+  //  }
 
-  association {
-    owner_type direct
-    member_type composition
-    owner RequirementsClass
-    member RequirementsModule#module
-  }
+  //  association {
+  //    owner_type composition
+  //    member_type direct
+  //    owner ConformanceModule#testSuite [1..*]
+  //    member ConformanceClass
+  //  }
 
-  association {
-    owner StandardizationTarget
-    member StandardizationTargetType
-  }
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner RequirementsClass
+  //    member RequirementsModule#modules
+  //  }
 
-  association {
-    owner_type direct
-    member_type composition
-    owner ConformanceModule
-    member ConformanceTest#test [1..*]
-  }
+  //  association {
+  //    owner StandardizationTarget
+  //    member StandardizationTargetType
+  //  }
 
-  association {
-    owner_type direct
-    member_type composition
-    owner RequirementsModule
-    member NormativeStatement#requirement [1..*]
-  }
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner ConformanceModule
+  //    member ConformanceTest#tests [1..*]
+  //  }
+
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner ConformanceTest
+  //    member ConformanceTestMethod#methods [1..*]
+  //  }
+
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner ConformanceTestMethod
+  //    member Requirement#requirements [1..*]
+  //  }
+
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner ConformanceTestMethod
+  //    member ConformanceTestStep#steps [1..*]
+  //  }
+
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner RequirementsModule
+  //    member Requirement#requirements [1..*]
+  //  }
+
+  //  association {
+  //    owner_type direct
+  //    member_type composition
+  //    owner RequirementsClass
+  //    member Requirement#requirements [1..*]
+  //  }
 
   association {
     owner Requirement
@@ -318,7 +429,7 @@ diagram OGCModSpec {
   association {
     owner_type direct
     member_type direct
-    owner ConformanceTest#test [1..*]
-    member Requirement#requirement [1..*]
+    owner ConformanceTest#tests [1..*]
+    member Requirement#requirements [1..*]
   }
 }
