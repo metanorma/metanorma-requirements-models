@@ -1,26 +1,29 @@
 diagram requirements {
 
   class Requirement {
-    +obligation: "requirement"
     definition {
       Specification of an attribute of a subject that is required.
 
       NOTE: A requirement can contain other requirements.
     }
+
+    +obligation: "requirement"
   }
 
   class Recommendation {
-    +obligation: "recommendation"
     definition {
       Specification of an attribute of a subject that is recommended.
     }
+
+    +obligation: "recommendation"
   }
 
   class Permission {
-    +obligation: "permission"
     definition {
       Specification of an attribute of a subject that is permitted.
     }
+
+    +obligation: "permission"
   }
 
   class Provision {
@@ -114,8 +117,10 @@ diagram requirements {
     }
 
     +import: RequirementSubpart[0..*] {
-      A reference to source code or a statement of prerequisites which is
-      defined elsewhere.
+      definition {
+        A reference to source code or a statement of prerequisites which is
+        defined elsewhere.
+      }
     }
 
     +description: RequirementSubpart[0..*] {
