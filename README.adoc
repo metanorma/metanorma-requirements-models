@@ -63,7 +63,13 @@ image::images/ogc-modspec.png[]
 
 include::views/requirements.lutaml[]
 
+=== OGC ModSpec models
+
+include::views/ogc-modspec.lutaml[]
+
 === Examples
+
+==== Metanorma requirements examples
 
 Encoding examples of Metanorma requirements models are available at
 https://github.com/metanorma/metanorma-mrr-samples[metanorma-mrr-samples].
@@ -117,6 +123,3 @@ https://github.com/metanorma/metanorma-mrr-samples[metanorma-mrr-samples].
 ----
 ====
 
-=== OGC ModSpec models
-
-include::views/ogc-modspec.lutaml[]
