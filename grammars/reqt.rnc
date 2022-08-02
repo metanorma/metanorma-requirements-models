@@ -25,7 +25,7 @@ RequirementType =
 
 
 reqtitle = element title { FormattedString }
-label = element label { TextElement+ }
+label = element identifier { TextElement+ }
 subject = element subject { TextElement+ }
 reqinherit = element inherit { TextElement+ }
 

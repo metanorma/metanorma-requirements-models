@@ -67,7 +67,7 @@ diagram requirements {
       }
     }
 
-    +label: FormattedString[0..1] {
+    +identifier: FormattedString[0..1] {
       definition {
         Formal identifier with which the requirement is referenced.
       }
@@ -81,7 +81,7 @@ diagram requirements {
 
     +inherit: String[0..*] {
       definition {
-        Reference to the label of another requirement, of which this requirement
+        Reference to the identifier of another requirement, of which this requirement
         is a subclass, and from which it inherits attributes.
       }
     }
