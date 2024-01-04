@@ -2,7 +2,7 @@ rm -f basicdoc-models/grammars/basicdoc.rng
 git submodule update
 
 cd basicdoc-models/grammars
-git checkout master && git pull
+git checkout main && git pull
 cd ../..
 cp basicdoc-models/grammars/basicdoc.rnc .
 

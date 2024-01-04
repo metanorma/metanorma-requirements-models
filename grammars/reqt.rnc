@@ -53,10 +53,3 @@ RequirementSubpart =
 
 ObligationType = ( "requirement" | "recommendation" | "permission" )
 
-classification = element classification {
-  classification_tag, classification_value
-}
-
-classification_tag = element tag { text }
-classification_value = element value { text }
-

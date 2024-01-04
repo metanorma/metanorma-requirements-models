@@ -182,9 +182,7 @@ diagram requirements {
     +class: String
   }
 
-  class ClassificationType {
-    +tag: String
-    +value: String
+  class ClassificationType  <<BasicDoc>> {
   }
 
   enum ObligationType <<enumeration>> {
