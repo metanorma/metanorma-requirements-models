@@ -18,6 +18,7 @@ RequirementType =
   attribute type { text }?,
   attribute tag { text }?,
   attribute multilingual-rendering { MultilingualRenderingType }?,
+  attribute class { text }?,
   reqtitle?, label?, subject*, reqinherit*, classification*,
   ( measurementtarget | specification | verification | import | description | component)*,
   reqt_references?,

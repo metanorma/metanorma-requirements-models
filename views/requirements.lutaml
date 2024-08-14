@@ -55,6 +55,13 @@ diagram requirements {
     //+keep-with-next: Boolean[0..1]
     //+keep-lines-together: Boolean[0..1]
 
+    +class: String[0..1] {
+      definition {
+        Class of provision, used to sequence and label that class separately.
+        By default, provisions are sequenced and labelled as requirements, recommendations, or
+        permissions, by obligation; the class overrides that.
+      }
+    }
     +filename: String[0..1] {
       definition {
         File name of the requirement model when exported.
