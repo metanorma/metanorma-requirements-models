@@ -6,7 +6,7 @@ recommendation = element recommendation { RequirementType }
 permission = element permission { RequirementType }
 
 RequirementType =  
-  attribute obligation { ObligationType }?,
+  attribute obligation { ReqtObligationType }?,
   attribute unnumbered { xsd:boolean }?,
   attribute number { text }?,
   attribute subsequence { text }?,
@@ -52,5 +52,5 @@ RequirementSubpart =
   (BasicBlock|component)+
 
 
-ObligationType = ( "requirement" | "recommendation" | "permission" )
+ReqtObligationType = ( "requirement" | "recommendation" | "permission" )
 
