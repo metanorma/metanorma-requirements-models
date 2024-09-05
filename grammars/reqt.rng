@@ -22,7 +22,7 @@
   <define name="RequirementType">
     <optional>
       <attribute name="obligation">
-        <ref name="ObligationType"/>
+        <ref name="ReqtObligationType"/>
       </attribute>
     </optional>
     <optional>
@@ -203,7 +203,7 @@
       </choice>
     </oneOrMore>
   </define>
-  <define name="ObligationType">
+  <define name="ReqtObligationType">
     <choice>
       <value>requirement</value>
       <value>recommendation</value>

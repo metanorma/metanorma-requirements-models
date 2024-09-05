@@ -93,9 +93,17 @@ diagram requirements {
       }
     }
 
-    +model: String[0..1]
+    +model: String[0..1] {
+       definition {
+         Model of requirements realised by this requirement, e.g. "ogc" for Modspec
+       }
+    }
 
-    +type: String[0..1]
+    +type: String[0..1] {
+       definition {
+         Type of requirement; does not override labelling, unlike `class`
+       }
+    }
 
     +classification: ClassificationType[0..*] {
       definition {
@@ -146,8 +154,18 @@ diagram requirements {
       }
     }
 
-    +component: ClassedRequirementSubpart[0..*]
-    +subRequirement: Provision[0..*]
+    +component: ClassedRequirementSubpart[0..*] {
+      definition {
+        Provisions nested within this provision, which cannot be referenced autonomous and have
+        subclasses specific to the parent provision. Not expressed with provision metadata.
+      }
+    }
+    +subRequirement: Provision[0..*] { 
+      definition {
+        Provisions nested within this provision, which are self-standing and do not have
+        subclasses specific to the parent provision
+      }
+    }
   }
 
   class RequirementSubpart {
@@ -178,7 +196,7 @@ diagram requirements {
       }
     }
 
-    +component: ClassedRequirementSubpart[0..*]
+    
 
     +content: Block[0..*]
     //+keep-with-next: Boolean[0..1]
