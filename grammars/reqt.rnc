@@ -34,7 +34,7 @@ RequirementType =
   ## Human-readable title of the requirement
   reqtitle?,
   ## Formal identifier with which the requirement is referenced
-  label?,
+  reqtlabel?,
   ## The party subject to the obligation stated in the requirement
   subject*,
   ## Reference to the identifier of another requirement, of which this requirement
@@ -69,7 +69,7 @@ RequirementType =
   ( requirement | recommendation | permission )*
 
 reqtitle = element title { FormattedString }
-label = element identifier { TextElement+ }
+reqtlabel = element identifier { TextElement+ }
 subject = element subject { TextElement+ }
 reqinherit = element inherit { TextElement+ }
 
