@@ -68,7 +68,7 @@ RequirementType =
   ## subclasses specific to the parent provision
   ( requirement | recommendation | permission )*
 
-reqtitle = element title { FormattedString }
+reqtitle = element title { LocalizedMarkedUpString }
 reqtlabel = element identifier { TextElement+ }
 subject = element subject { TextElement+ }
 reqinherit = element inherit { TextElement+ }
