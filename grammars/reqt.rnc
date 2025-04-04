@@ -1,3 +1,7 @@
+requirement = element requirement { RequirementType }
+
+# ALERT: cannot have root comments, because of https://github.com/metanorma/metanorma/issues/437
+
 #Presupposes isodoc.rnc, is included in it
 #include "isodoc.rnc" { }
 #
@@ -6,7 +10,6 @@
 
 ## Specification of an attribute of a subject that is required.
 ## NOTE: A requirement can contain other requirements
-requirement = element requirement { RequirementType }
 
 ## Specification of an attribute of a subject that is recommended
 recommendation = element recommendation { RequirementType }
