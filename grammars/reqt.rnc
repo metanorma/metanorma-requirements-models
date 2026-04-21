@@ -26,8 +26,13 @@ RequirementType =
   BlockAttributes,
   ## File name of the requirement model when exported
   attribute filename { text }?,
-  ## Model of requirements realised by this requirement, e.g. "ogc" for Modspec
+  ## Model of requirements realised by this requirement, e.g. "ogc" for Modspec.
+  ## Current legal values: ogc, default
   attribute model { text }?,
+  ## Rendering of requirements realised by this requirement. Current legal values:
+  ## default:: default, inline
+  ## ogc:: default
+  attribute render { text }?,
   ## Type of requirement; does not override labelling, unlike `class`
   attribute type { text }?,
   ## Class of provision, used to sequence and label that class separately.
