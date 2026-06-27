@@ -23,7 +23,10 @@ RequirementType =
   attribute obligation { ReqtObligationType }?,
   attribute id { xsd:ID },
   NumberingAttributes,
-  BlockAttributes,
+  ## requirement carries its own semantic `class` (provision class, below), so
+  ## it uses BlockAttributesCore to avoid duplicating the custom-class slot now
+  ## in BlockAttributes. See metanorma/metanorma-standoc#1197
+  BlockAttributesCore,
   ## File name of the requirement model when exported
   attribute filename { text }?,
   ## Model of requirements realised by this requirement, e.g. "ogc" for Modspec.
@@ -108,7 +111,10 @@ RequirementSubpart =
   ## Indicates that the current sub-container is only intended to be
   ## machine-readable, and is not to be rendered as document output
   attribute exclude { xsd:boolean }?,
-  BlockAttributes,
+  ## component (a RequirementSubpart) carries its own semantic `class`, so this
+  ## uses BlockAttributesCore to avoid duplicating the custom-class slot in
+  ## BlockAttributes. See metanorma/metanorma-standoc#1197
+  BlockAttributesCore,
   ## Content of subpart: blocks, rather than provisions
   (BasicBlock|component)+
 
