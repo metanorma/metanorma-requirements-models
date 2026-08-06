@@ -21,7 +21,11 @@ RequirementType =
   ## An attribute that may be used to override the obligation represented in
   ## the tag name of the top level containers
   attribute obligation { ReqtObligationType }?,
-  attribute id { xsd:ID },
+  ## Identification of provisions routed through the shared ID patterns,
+  ## like every other identified block: content GUID in `id`, with the
+  ## isodoc context adding the user-supplied `anchor` (e.g. Modspec
+  ## identifiers) and `source` (metanorma-model-iso#149)
+  RequiredId,
   NumberingAttributes,
   ## requirement carries its own semantic `class` (provision class, below), so
   ## it uses BlockAttributesCore to avoid duplicating the custom-class slot now
@@ -102,7 +106,12 @@ reqt_references = element references { bibitem+ }
 ## mixture of the two.
 ## A machine-readable component can be included as source code with
 ## nomination of the language
-RequirementSubpart = 
+RequirementSubpart =
+  ## Identification of subparts routed through the shared ID patterns:
+  ## the generator stamps every subpart (description, specification,
+  ## component, ...) with a content GUID `id`, like every other
+  ## identified block (metanorma-model-iso#149)
+  RequiredId,
   ## Type of sub-container.
   ## For example a `verification[@type = "unit-test"]` contains a unit test of a single
   ## feature, and is to be treated differently from
