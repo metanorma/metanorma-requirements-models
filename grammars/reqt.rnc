@@ -107,11 +107,11 @@ reqt_references = element references { bibitem+ }
 ## A machine-readable component can be included as source code with
 ## nomination of the language
 RequirementSubpart =
-  ## Identification of subparts routed through the shared ID patterns:
-  ## the generator stamps every subpart (description, specification,
-  ## component, ...) with a content GUID `id`, like every other
-  ## identified block (metanorma-model-iso#149)
-  RequiredId,
+  ## Identification of subparts routed through the shared ID patterns
+  ## (metanorma-model-iso#149). Optional, not required: only some generator
+  ## pipelines (Modspec) stamp subparts with content GUIDs; others emit
+  ## description/specification/component without ids
+  OptionalId,
   ## Type of sub-container.
   ## For example a `verification[@type = "unit-test"]` contains a unit test of a single
   ## feature, and is to be treated differently from
