@@ -75,13 +75,22 @@ RequirementType =
     description |
     ## Provisions nested within this provision, which cannot be referenced autonomously and have
     ## subclasses specific to the parent provision. Not expressed with provision metadata
-    component
+    component |
+    ## Provisions nested within this provision, which are self-standing and do not have
+    ## subclasses specific to the parent provision. Interleaved with the other
+    ## sub-containers: a requirements class alternates descriptions with its member
+    ## provisions, and descriptions resume after interruption
+    ## (metanorma-model-iso#160)
+    requirement | recommendation | permission
   )*,
   ## A list of references for the requirement, following the Relaton model
-  reqt_references?,
-  ## Provisions nested within this provision, which are self-standing and do not have
-  ## subclasses specific to the parent provision
-  ( requirement | recommendation | permission )*
+  reqt_references?
+
+## Provisions presented illustratively inside examples. This shape is
+## expected only in documents defining schemas and standards (e.g. the
+## Modspec specification exhibiting requirement boxes), not in
+## standards proper (metanorma-model-iso#160)
+ExampleBodyContent |= requirement | recommendation | permission
 
 reqtitle = element title { LocalizedMarkedUpString }
 reqtlabel = element identifier { TextElement+ }
